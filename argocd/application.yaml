@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: cloud-native-gitops
+
+spec:
+  destination:
+    namespace: gitops-platform
+    server: https://kubernetes.default.svc
+
+  source:
+    repoURL: https://github.com/basodes/cloud-native-gitops-platform
+    path: kubernetes
+    targetRevision: HEAD
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
